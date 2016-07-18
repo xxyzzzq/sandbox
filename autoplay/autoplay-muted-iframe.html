@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Autoplay muted videos test page</title>
+</head>
+<body>
+  <textarea rows=100>I am spacing</textarea>
+  <section>
+    <div>muted that will autoplay with play() after 2 secs</div>
+    <video src='https://storage.googleapis.com/dalecurtis-shared/buck2.mp4' controls muted id='play'></video>
+  </section>
+  <section>
+    <div>autoplay muted with automatic unmuting after 2 secs</div>
+    <video src='https://storage.googleapis.com/dalecurtis-shared/buck2.mp4' controls autoplay muted id='unmute'></video>
+  </section>
+  <section>
+    <div>autoplay muted</div>
+    <video src='https://storage.googleapis.com/dalecurtis-shared/buck2.mp4' controls autoplay muted></video>
+  </section>
+  <section>
+    <div>autoplay muted iframe</div>
+    <iframe src='iframe-test-muted.html' width='600' height='380'></iframe>
+  </section>
+</body>
+<script>
+setTimeout(function() {
+  document.querySelector('#play').play();
+  document.querySelector('#unmute').muted = false;
+}, 2000);
+</script>
+</html>
