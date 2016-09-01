@@ -35,9 +35,9 @@
 
   function updateMetadata(event) {
       if (audio1.playing)
-          navigator.window.mediaSession.metadata = metadata1;
+          window.navigator.mediaSession.metadata = metadata1;
       else
-          navigator.window.mediaSession.metadata = metadata2;
+          window.navigator.mediaSession.metadata = metadata2;
   }
 </script>
 </html>
