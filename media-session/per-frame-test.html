@@ -17,8 +17,14 @@
 <script>
   var audio1 = document.querySelector('#tetris1');
   var audio2 = document.querySelector('#tetris2');
-  audio1.addEventListener("play", updateMetadata);
-  audio2.addEventListener("play", updateMetadata);
+  audio1.addEventListener("play", function(e) {
+      audio2.pause();
+      updateMetadata(e);
+  });
+  audio2.addEventListener("play", function(e) {
+      audio1.pause();
+      updateMetadata(e);
+  });
 
   var metadata1 = new MediaMetadata({
       title: "Tetris1",
