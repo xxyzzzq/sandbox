@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Media Session Test page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <audio id=tetris controls>
+      <source src="../media/tetris.mp3" type='audio/mp3'>
+      <source src="../media/tetris.ogg" type='audio/ogg; codecs=vorbis'>
+    </audio>
+    <audio id=pacman controls>
+      <source src="../media/pacman_beginning.mp3" type='audio/mp3'>
+      <source src="../media/pacman_beginning.ogg" type='audio/ogg; codecs=vorbis'>
+    </audio>
+</body>
+<script>
+  var audio1 = document.querySelector('#tetris');
+  var audio2 = document.querySelector('#pacman');
+  audio1.addEventListener("play", updateMetadata);
+  audio2.addEventListener("play", updateMetadata);
+
+  var metadata1 = new MediaMetadata({
+      title: "Tetris",
+      artist: "Artist1",
+      album: "Album1",
+      artwork: [{src: "test-icon.png"}]
+  });
+  var metadata2 = new MediaMetadata({
+      title: "Pacman",
+      artist: "Artist2",
+      album: "Album2",
+      artwork: [{src: "icon-96-96-x2.png"}]
+  });
+
+  function updateMetadata(event) {
+      if (audio1.playing)
+          navigator.window.mediaSession.metadata = metadata1;
+      else
+          navigator.window.mediaSession.metadata = metadata2;
+  }
+</script>
+</html>
