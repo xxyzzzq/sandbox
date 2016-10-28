@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Media Session Test page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <audio id=tetris1 controls>
+      <source src="../media/tetris.mp3" type='audio/mp3'>
+      <source src="../media/tetris.ogg" type='audio/ogg; codecs=vorbis'>
+    </audio>
+    <audio id=tetris2 controls>
+      <source src="../media/tetris.mp3" type='audio/mp3'>
+      <source src="../media/tetris.ogg" type='audio/ogg; codecs=vorbis'>
+    </audio>
+</body>
+<script>
+tetris1 = document.getElementById("tetris1");
+tetris2 = document.getElementById("tetris2");
+
+tetris1.onplay = function () {
+  window.navigator.mediaSession.metadata = new MediaMetadata({
+    title: 'Song1',
+    album: 'Album1',
+    artist: 'Artist1',
+    artwork: [{
+        src: "./sad_portrait.png",
+        sizes: "128x128 256x256",
+        type: "image/png"
+      }]
+  });
+  tetris2.pause();
+}
+tetris2.onplay = function () {
+  window.navigator.mediaSession.metadata = new MediaMetadata({
+    title: 'Song2',
+    album: 'Album2',
+    artist: 'Artist2',
+    artwork: [{
+        src: "./smile_landscape.png",
+        sizes: "128x128 256x256",
+        type: "image/png"
+      }]
+  });
+  tetris1.pause();
+}
+</script>
+</html>
