@@ -83,6 +83,7 @@ function togglePlayPause() {
 playPauseButton.onclick = togglePlayPause;
 previousTrackButton.onclick = selectPreviousTrack;
 nextTrackButton.onclick = selectNextTrack;
+audio.onended = selectNextTrack;
 
 window.navigator.mediaSession.onprevioustrack = selectPreviousTrack;
 window.navigator.mediaSession.onnexttrack = selectNextTrack;
