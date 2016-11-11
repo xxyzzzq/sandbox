@@ -7,7 +7,9 @@
 <body>
     <audio id="audio" controls></audio>
     <button type="button" id="previous-track-button">Previous track</button>
+    <button type="button" id="seek-backward-button">Seek backward</button>
     <button type="button" id="play-pause-button">Play/pause</button>
+    <button type="button" id="seek-forward-button">Seek forward</button>
     <button type="button" id="next-track-button">Next track</button>
     <br/>
     * Music obtained from www.bensound.com under Creative Commons License.
@@ -50,6 +52,8 @@ var trackId = 0;
 var playPauseButton = document.getElementById("play-pause-button");
 var previousTrackButton = document.getElementById("previous-track-button");
 var nextTrackButton = document.getElementById("next-track-button");
+var seekBackwardButton = document.getElementById("seek-backward-button");
+var seekForwardButton = document.getElementById("seek-forward-button");
 
 var audio = document.getElementById("audio");
 
@@ -71,6 +75,16 @@ function selectNextTrack(e) {
   e.preventDefault();
 }
 
+function seekBackward(e) {
+  audio.currentTime = Math.max(audio.currentTime - 10000, 0);
+  e.preventDefault();
+}
+
+function seekForward(e) {
+  audio.currentTime = Math.min(audio.currentTime + 10000, audio.duration);
+  e.preventDefault();
+}
+
 function togglePlayPause(e) {
   if (audio.src) {
     if (audio.paused)
@@ -86,6 +100,8 @@ function togglePlayPause(e) {
 playPauseButton.onclick = togglePlayPause;
 previousTrackButton.onclick = selectPreviousTrack;
 nextTrackButton.onclick = selectNextTrack;
+seekBackwardButton.onclick = seekBackward;
+seekForwardButton.onclick = seekForward;
 audio.onended = selectNextTrack;
 
 window.navigator.mediaSession.onprevioustrack = selectPreviousTrack;
