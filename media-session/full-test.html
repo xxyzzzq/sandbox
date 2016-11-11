@@ -59,17 +59,19 @@ function updateTrack() {
   audio.play();
 }
 
-function selectPreviousTrack() {
+function selectPreviousTrack(e) {
   trackId = (trackId + tracks.length - 1) % tracks.length;
   updateTrack();
+  e.preventDefault();
 }
 
-function selectNextTrack() {
+function selectNextTrack(e) {
   trackId = (trackId + 1) % tracks.length;
   updateTrack();
+  e.preventDefault();
 }
 
-function togglePlayPause() {
+function togglePlayPause(e) {
   if (audio.src) {
     if (audio.paused)
       audio.play();
@@ -78,6 +80,7 @@ function togglePlayPause() {
   } else {
     updateTrack();
   }
+  e.preventDefault();
 }
 
 playPauseButton.onclick = togglePlayPause;
