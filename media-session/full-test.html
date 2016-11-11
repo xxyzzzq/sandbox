@@ -76,12 +76,12 @@ function selectNextTrack(e) {
 }
 
 function seekBackward(e) {
-  audio.currentTime = Math.max(audio.currentTime - 10000, 0);
+  audio.currentTime = Math.max(audio.currentTime - 10, 0);
   e.preventDefault();
 }
 
 function seekForward(e) {
-  audio.currentTime = Math.min(audio.currentTime + 10000, audio.duration);
+  audio.currentTime = Math.min(audio.currentTime + 10, audio.duration);
   e.preventDefault();
 }
 
