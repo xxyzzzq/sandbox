@@ -12,6 +12,10 @@
     <button type="button" id="seek-forward-button">Seek forward</button>
     <button type="button" id="next-track-button">Next track</button>
     <br/>
+    <label><input type="checkbox" id="previous-track-checkbox">Enable previous track</label><br/>
+    <label><input type="checkbox" id="next-track-checkbox">Enable previous track</label><br/>
+    <label><input type="checkbox" id="seek-forward-checkbox">Enable previous track</label><br/>
+    <label><input type="checkbox" id="seek-backward-checkbox">Enable previous track</label><br/>
     * Music obtained from www.bensound.com under Creative Commons License.
 </body>
 <script>
@@ -54,6 +58,11 @@ var previousTrackButton = document.getElementById("previous-track-button");
 var nextTrackButton = document.getElementById("next-track-button");
 var seekBackwardButton = document.getElementById("seek-backward-button");
 var seekForwardButton = document.getElementById("seek-forward-button");
+
+var previousTrackCheckbox = document.getElementById("previous-track-checkbox");
+var nextTrackCheckbox = document.getElementById("next-track-checkbox");
+var seekBackwardCheckbox = document.getElementById("seek-backward-checkbox");
+var seekForwardCheckbox = document.getElementById("seek-forward-checkbox");
 
 var audio = document.getElementById("audio");
 
@@ -103,6 +112,19 @@ nextTrackButton.onclick = selectNextTrack;
 seekBackwardButton.onclick = seekBackward;
 seekForwardButton.onclick = seekForward;
 audio.onended = selectNextTrack;
+
+previousTrackCheckbox.onchange = function() {
+    window.navigator.mediaSession.onprevioustrack = previousTrackCheckbox.checked ? selectPreviousTrack : null;
+}
+nextTrackCheckbox.onchange = function() {
+    window.navigator.mediaSession.onnexttrack = nextTrackCheckbox.checked ? selectNextTrack : null;
+}
+seekBackwardCheckbox.onchange = function() {
+    window.navigator.mediaSession.onseekbackward = seekBackwardCheckbox.checked ? seekBackward : null;
+}
+seekForwardCheckbox.onchange = function() {
+    window.navigator.mediaSession.onseekforward = seekForwardCheckbox.checked ? seekForward : null;
+}
 
 window.navigator.mediaSession.onprevioustrack = selectPreviousTrack;
 window.navigator.mediaSession.onnexttrack = selectNextTrack;
