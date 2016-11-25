@@ -126,6 +126,7 @@ seekForwardCheckbox.onchange = function() {
     window.navigator.mediaSession.onseekforward = seekForwardCheckbox.checked ? seekForward : null;
 }
 
+window.navigator.mediaSession.onplaypause = togglePlayPause;
 window.navigator.mediaSession.onprevioustrack = selectPreviousTrack;
 window.navigator.mediaSession.onnexttrack = selectNextTrack;
 window.navigator.mediaSession.onseekbackward = seekBackward;
