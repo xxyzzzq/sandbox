@@ -148,7 +148,7 @@ window.navigator.mediaSession.onseekforward = seekForward;
 
 document.getElementById('upload-image').addEventListener('change', function() {
   var blobURL = URL.createObjectURL(this.files[0]);
-  window.navigator.mediaSession.metadata = new MediaMetadata({title:"Cute", artist: "Bensound", artwork: [{ src: blobURL }]});
+  window.navigator.mediaSession.metadata = new MediaMetadata({title:"Blob", artist: "Bensound", artwork: [{ src: blobURL }]});
 });
 
 </script>
