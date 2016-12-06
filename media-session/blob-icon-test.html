@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Media Session Test page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <audio id="audio" controls></audio>
+    <button type="button" id="previous-track-button">Previous track</button>
+    <button type="button" id="seek-backward-button">Seek backward</button>
+    <button type="button" id="play-pause-button">Play/pause</button>
+    <button type="button" id="seek-forward-button">Seek forward</button>
+    <button type="button" id="next-track-button">Next track</button>
+    <br/>
+    <label><input type="checkbox" id="previous-track-checkbox" checked>Enable previous track</label><br/>
+    <label><input type="checkbox" id="next-track-checkbox" checked>Enable next track</label><br/>
+    <label><input type="checkbox" id="seek-forward-checkbox" checked>Enable seek backward</label><br/>
+    <label><input type="checkbox" id="seek-backward-checkbox" checked>Enable seek forward</label><br/>
+    * Music obtained from www.bensound.com under Creative Commons License.
+
+    <label><input type="file" id="upload-image" accepts="image/*" value="Upload image">Upload Image</label><br/>
+</body>
+<script>
+
+var tracks = [
+  {
+    src: "media/acousticbreeze.mp3",
+    metadata: new MediaMetadata({title:"Acoustic Breeze", artist: "Bensound", artwork: [{ src: "images/icon_1.png" }]})
+  },
+  {
+    src: "media/buddy.mp3",
+    metadata: new MediaMetadata({title:"Buddy", artist: "Bensound", artwork: [{ src: "images/icon_2.png" }]})
+  },
+  {
+    src: "media/cute.mp3",
+    metadata: new MediaMetadata({title:"Cute", artist: "Bensound", artwork: [{ src: "images/icon_3.png" }]})
+  },
+  {
+    src: "media/happiness.mp3",
+    metadata: new MediaMetadata({title:"Happiness", artist: "Bensound", artwork: [{ src: "images/icon_4.png" }]})
+  },
+  {
+    src: "media/sunny.mp3",
+    metadata: new MediaMetadata({title:"Sunny", artist: "Bensound", artwork: [{ src: "images/icon_5.png" }]})
+  },
+  {
+    src: "media/tenderness.mp3",
+    metadata: new MediaMetadata({title:"Tenderness", artist: "Bensound", artwork: [{ src: "images/icon_6.png" }]})
+  },
+  {
+    src: "media/ukulele.mp3",
+    metadata: new MediaMetadata({title:"Ukulele", artist: "Bensound", artwork: [{ src: "images/icon_7.png" }]})
+  },
+]
+
+var trackId = 0;
+
+var playPauseButton = document.getElementById("play-pause-button");
+var previousTrackButton = document.getElementById("previous-track-button");
+var nextTrackButton = document.getElementById("next-track-button");
+var seekBackwardButton = document.getElementById("seek-backward-button");
+var seekForwardButton = document.getElementById("seek-forward-button");
+
+var previousTrackCheckbox = document.getElementById("previous-track-checkbox");
+var nextTrackCheckbox = document.getElementById("next-track-checkbox");
+var seekBackwardCheckbox = document.getElementById("seek-backward-checkbox");
+var seekForwardCheckbox = document.getElementById("seek-forward-checkbox");
+
+var audio = document.getElementById("audio");
+
+function updateTrack() {
+  audio.src = tracks[trackId].src;
+  window.navigator.mediaSession.metadata = tracks[trackId].metadata;
+  audio.play();
+}
+
+function selectPreviousTrack(e) {
+  trackId = (trackId + tracks.length - 1) % tracks.length;
+  updateTrack();
+  e.preventDefault();
+}
+
+function selectNextTrack(e) {
+  trackId = (trackId + 1) % tracks.length;
+  updateTrack();
+  e.preventDefault();
+}
+
+function seekBackward(e) {
+  audio.currentTime = Math.max(audio.currentTime - 10, 0);
+  e.preventDefault();
+}
+
+function seekForward(e) {
+  audio.currentTime = Math.min(audio.currentTime + 10, audio.duration);
+  e.preventDefault();
+}
+
+function togglePlayPause(e) {
+  if (audio.src) {
+    if (audio.paused)
+      audio.play();
+    else
+      audio.pause();
+  } else {
+    updateTrack();
+  }
+  e.preventDefault();
+}
+
+function playAudio(e) {
+    if (audio.src) {
+        audio.play();
+    } else {
+        updateTrack();
+    }
+}
+
+function pauseAudio(e) {
+    audio.pause();
+}
+
+playPauseButton.onclick = togglePlayPause;
+previousTrackButton.onclick = selectPreviousTrack;
+nextTrackButton.onclick = selectNextTrack;
+seekBackwardButton.onclick = seekBackward;
+seekForwardButton.onclick = seekForward;
+audio.onended = selectNextTrack;
+
+previousTrackCheckbox.onchange = function() {
+    window.navigator.mediaSession.onprevioustrack = previousTrackCheckbox.checked ? selectPreviousTrack : null;
+}
+nextTrackCheckbox.onchange = function() {
+    window.navigator.mediaSession.onnexttrack = nextTrackCheckbox.checked ? selectNextTrack : null;
+}
+seekBackwardCheckbox.onchange = function() {
+    window.navigator.mediaSession.onseekbackward = seekBackwardCheckbox.checked ? seekBackward : null;
+}
+seekForwardCheckbox.onchange = function() {
+    window.navigator.mediaSession.onseekforward = seekForwardCheckbox.checked ? seekForward : null;
+}
+
+window.navigator.mediaSession.onplaypause = togglePlayPause;
+window.navigator.mediaSession.onprevioustrack = selectPreviousTrack;
+window.navigator.mediaSession.onnexttrack = selectNextTrack;
+window.navigator.mediaSession.onseekbackward = seekBackward;
+window.navigator.mediaSession.onseekforward = seekForward;
+
+document.getElementById('upload-image').addEventListener('change', function() {
+  var blobURL = URL.createObjectURL(this.files[0]);
+  window.navigator.mediaSession.metadata = new MediaMetadata({title:"Cute", artist: "Bensound", artwork: [{ src: blobURL }]});
+});
+
+</script>
+</html>
