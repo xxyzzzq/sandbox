@@ -50,7 +50,7 @@ function updateMediaSession() {
     return new Promise(resolve => {
       setTimeout(_ => {
         resolve(updateMediaSession());
-      }, 1000);
+      }, 10000);
     });
   });
 }
