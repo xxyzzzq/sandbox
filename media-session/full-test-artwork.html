@@ -72,29 +72,25 @@ function updateTrack() {
   audio.play();
 }
 
-function selectPreviousTrack(e) {
+function selectPreviousTrack() {
   trackId = (trackId + tracks.length - 1) % tracks.length;
   updateTrack();
-  e.preventDefault();
 }
 
-function selectNextTrack(e) {
+function selectNextTrack() {
   trackId = (trackId + 1) % tracks.length;
   updateTrack();
-  e.preventDefault();
 }
 
-function seekBackward(e) {
+function seekBackward() {
   audio.currentTime = Math.max(audio.currentTime - 10, 0);
-  e.preventDefault();
 }
 
-function seekForward(e) {
+function seekForward() {
   audio.currentTime = Math.min(audio.currentTime + 10, audio.duration);
-  e.preventDefault();
 }
 
-function togglePlayPause(e) {
+function togglePlayPause() {
   if (audio.src) {
     if (audio.paused)
       audio.play();
@@ -103,10 +99,9 @@ function togglePlayPause(e) {
   } else {
     updateTrack();
   }
-  e.preventDefault();
 }
 
-function playAudio(e) {
+function playAudio() {
     if (audio.src) {
         audio.play();
     } else {
@@ -114,7 +109,7 @@ function playAudio(e) {
     }
 }
 
-function pauseAudio(e) {
+function pauseAudio() {
     audio.pause();
 }
 
