@@ -69,23 +69,29 @@ var seekBackwardCheckbox = document.getElementById("seek-backward-checkbox");
 var seekForwardCheckbox = document.getElementById("seek-forward-checkbox");
 
 var audio = document.getElementById("audio");
+var trackIdShift = 1;
 
 function updateTrack() {
   audio.src = tracks[trackId].src;
   window.navigator.mediaSession.metadata = tracks[trackId].metadata;
-  audio.play().catch(_ => selectNextTrack());
+  audio.play().catch(_ => skipTrack());
 }
 
 function selectPreviousTrack() {
-  trackId = (trackId + tracks.length - 1) % tracks.length;
-  updateTrack();
+  trackIdShift = 1;
+  skipTrack();
 }
 
 function selectNextTrack() {
-  trackId = (trackId + 1) % tracks.length;
-  updateTrack();
+  trackIdShift = -1;
+  skipTrack();
 }
 
+function skipTrack() {
+  trackId = (trackId + tracks.length + trackIdShift) % tracks.length;
+  updateTrack();
+}
+    
 function seekBackward() {
   audio.currentTime = Math.max(audio.currentTime - 10, 0);
 }
