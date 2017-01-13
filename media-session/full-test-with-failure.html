@@ -73,7 +73,7 @@ var audio = document.getElementById("audio");
 function updateTrack() {
   audio.src = tracks[trackId].src;
   window.navigator.mediaSession.metadata = tracks[trackId].metadata;
-  audio.play();
+  audio.play().catch(_ => selectNextTrack());
 }
 
 function selectPreviousTrack() {
