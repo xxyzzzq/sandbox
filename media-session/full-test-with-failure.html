@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Media Session Test page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <audio id="audio" controls></audio>
+    <button type="button" id="previous-track-button">Previous track</button>
+    <button type="button" id="seek-backward-button">Seek backward</button>
+    <button type="button" id="play-pause-button">Play/pause</button>
+    <button type="button" id="seek-forward-button">Seek forward</button>
+    <button type="button" id="next-track-button">Next track</button>
+    <br/>
+    <label><input type="checkbox" id="previous-track-checkbox" checked>Enable previous track</label><br/>
+    <label><input type="checkbox" id="next-track-checkbox" checked>Enable next track</label><br/>
+    <label><input type="checkbox" id="seek-forward-checkbox" checked>Enable seek backward</label><br/>
+    <label><input type="checkbox" id="seek-backward-checkbox" checked>Enable seek forward</label><br/>
+    * Music obtained from www.bensound.com under Creative Commons License.
+</body>
+<script>
+
+var tracks = [
+  {
+    src: "media/acousticbreeze.mp3",
+    metadata: new MediaMetadata({title:"Acoustic Breeze", artist: "Bensound", artwork: [{ src: "images/icon_1.png" }]})
+  },
+  {
+    src: "media/buddy.mp3",
+    metadata: new MediaMetadata({title:"Buddy", artist: "Bensound", artwork: [{ src: "images/icon_2.png" }]})
+  },
+  {
+    src: "media/cute.mp3",
+    metadata: new MediaMetadata({title:"Cute", artist: "Bensound", artwork: [{ src: "images/icon_3.png" }]})
+  },
+  {
+    src: "invalid.mp3",
+    metadata: new MediaMetadata({title:"Invalid", artist: "Bensound"})
+  },
+  {
+    src: "media/happiness.mp3",
+    metadata: new MediaMetadata({title:"Happiness", artist: "Bensound", artwork: [{ src: "images/icon_4.png" }]})
+  },
+  {
+    src: "media/sunny.mp3",
+    metadata: new MediaMetadata({title:"Sunny", artist: "Bensound", artwork: [{ src: "images/icon_5.png" }]})
+  },
+  {
+    src: "media/tenderness.mp3",
+    metadata: new MediaMetadata({title:"Tenderness", artist: "Bensound", artwork: [{ src: "images/icon_6.png" }]})
+  },
+  {
+    src: "media/ukulele.mp3",
+    metadata: new MediaMetadata({title:"Ukulele", artist: "Bensound", artwork: [{ src: "images/icon_7.png" }]})
+  },
+]
+
+var trackId = 0;
+
+var playPauseButton = document.getElementById("play-pause-button");
+var previousTrackButton = document.getElementById("previous-track-button");
+var nextTrackButton = document.getElementById("next-track-button");
+var seekBackwardButton = document.getElementById("seek-backward-button");
+var seekForwardButton = document.getElementById("seek-forward-button");
+
+var previousTrackCheckbox = document.getElementById("previous-track-checkbox");
+var nextTrackCheckbox = document.getElementById("next-track-checkbox");
+var seekBackwardCheckbox = document.getElementById("seek-backward-checkbox");
+var seekForwardCheckbox = document.getElementById("seek-forward-checkbox");
+
+var audio = document.getElementById("audio");
+
+function updateTrack() {
+  audio.src = tracks[trackId].src;
+  window.navigator.mediaSession.metadata = tracks[trackId].metadata;
+  audio.play();
+}
+
+function selectPreviousTrack() {
+  trackId = (trackId + tracks.length - 1) % tracks.length;
+  updateTrack();
+}
+
+function selectNextTrack() {
+  trackId = (trackId + 1) % tracks.length;
+  updateTrack();
+}
+
+function seekBackward() {
+  audio.currentTime = Math.max(audio.currentTime - 10, 0);
+}
+
+function seekForward() {
+  audio.currentTime = Math.min(audio.currentTime + 10, audio.duration);
+}
+
+function togglePlayPause() {
+  if (audio.src) {
+    if (audio.paused)
+      audio.play();
+    else
+      audio.pause();
+  } else {
+    updateTrack();
+  }
+}
+
+function playAudio() {
+    if (audio.src) {
+        audio.play();
+    } else {
+        updateTrack();
+    }
+}
+
+function pauseAudio() {
+    audio.pause();
+}
+
+playPauseButton.onclick = togglePlayPause;
+previousTrackButton.onclick = selectPreviousTrack;
+nextTrackButton.onclick = selectNextTrack;
+seekBackwardButton.onclick = seekBackward;
+seekForwardButton.onclick = seekForward;
+audio.onended = selectNextTrack;
+
+previousTrackCheckbox.onchange = function() {
+    window.navigator.mediaSession.onprevioustrack = previousTrackCheckbox.checked ? selectPreviousTrack : null;
+}
+nextTrackCheckbox.onchange = function() {
+    window.navigator.mediaSession.onnexttrack = nextTrackCheckbox.checked ? selectNextTrack : null;
+}
+seekBackwardCheckbox.onchange = function() {
+    window.navigator.mediaSession.onseekbackward = seekBackwardCheckbox.checked ? seekBackward : null;
+}
+seekForwardCheckbox.onchange = function() {
+    window.navigator.mediaSession.onseekforward = seekForwardCheckbox.checked ? seekForward : null;
+}
+
+window.navigator.mediaSession.setActionHandler("play", playAudio);
+window.navigator.mediaSession.setActionHandler("pause", pauseAudio);
+window.navigator.mediaSession.setActionHandler("previoustrack", selectPreviousTrack);
+window.navigator.mediaSession.setActionHandler("nexttrack", selectNextTrack);
+window.navigator.mediaSession.setActionHandler("seekbackward", seekBackward);
+window.navigator.mediaSession.setActionHandler("seekforward", seekForward);
+
+</script>
+</html>
