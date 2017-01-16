@@ -108,9 +108,13 @@ function playAudio() {
         updateTrack();
     }
 }
-
+var counter = 0;
+    
 function pauseAudio() {
-    audio.pause();
+    if (counter++ < 1)
+        audio.pause();
+    else
+        audio.play();
 }
 
 playPauseButton.onclick = togglePlayPause;
