@@ -111,10 +111,10 @@ function playAudio() {
 var counter = 0;
     
 function pauseAudio() {
-    if (counter++ < 1)
-        audio.pause();
-    else
+    if (audio.paused)
         audio.play();
+    else
+        audio.pause();
 }
 
 playPauseButton.onclick = togglePlayPause;
