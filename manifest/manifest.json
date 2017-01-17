@@ -1,17 +1,12 @@
 {
-  "lang": "en",
-  "name": "Web Manifest Test",
-  "description": "Web Manifest test with autoplay",
-  "short_name": "WebManifestTest",
-  "icons": [{
-    "src": "../media-session/images/icon_1.png",
-    "sizes": "256x256",
-    "type": "image/png"
-  }],
-  "scope": "/sandbox/manifest/",
+  "name": "Web Manifest Test Page",
+  "icons": [
+    {
+      "src": "/sandbox/media-session/images/icon_1.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }
+  ],
   "start_url": "/sandbox/manifest/simple-app.html",
-  "display": "standalone",
-  "orientation": "portrait",
-  "theme_color": "aliceblue",
-  "background_color": "red"
+  "display": "standalone"
 }
