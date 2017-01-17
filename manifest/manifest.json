@@ -10,7 +10,7 @@
   }],
   "scope": "/sandbox/manifest/",
   "start_url": "/sandbox/manifest/simple-app.html",
-  "display": "fullscreen",
+  "display": "standalone",
   "orientation": "portrait",
   "theme_color": "aliceblue",
   "background_color": "red"
