@@ -4,7 +4,7 @@
   "description": "Web Manifest test with autoplay",
   "short_name": "WebManifestTest",
   "icons": [{
-    "src": "../media-session/images",
+    "src": "../media-session/images/icon_1.png",
     "sizes": "256x256",
     "type": "image/png"
   }],
