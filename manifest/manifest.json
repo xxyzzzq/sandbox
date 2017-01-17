@@ -8,8 +8,8 @@
     "sizes": "256x256",
     "type": "image/png"
   }],
-  "scope": "/manifest/",
-  "start_url": "/manifest/simple-app.html",
+  "scope": "/sandbox/manifest/",
+  "start_url": "/sandbox/manifest/simple-app.html",
   "display": "fullscreen",
   "orientation": "portrait",
   "theme_color": "aliceblue",
