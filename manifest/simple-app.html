@@ -17,7 +17,9 @@
       <h2>Audio autoplay by play() method</h2>
       <audio src="../media/tetris.mp3" id="audio2" controls></audio>
       <script>
-        document.getElementById("audio2").play();
+        document.getElementById("audio2").play()
+          .then(_ => console.log("audio2 autoplay success"))
+          .catch(_ => console.log("audio2 autoplay failure"));
       </script>
     </section>
     <section>
