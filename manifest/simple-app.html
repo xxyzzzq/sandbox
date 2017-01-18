@@ -12,5 +12,14 @@
     <section>
       Page content...
     </section>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js', {scope: './'}).then(function(registration) {
+          console.log("registered service worker");
+        }).catch(function(error) {
+          console.log("failed to register service worker");
+        });
+      }
+    </script>
   </body>
 </html>
