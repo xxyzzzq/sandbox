@@ -10,7 +10,27 @@
       <h1>Web Manifest Test Page</h1>
     </header>
     <section>
-      Page content...
+      <h2>Audio autoplay by attribute</h2>
+      <audio src="../media/tetris.mp3" id="audio1" controls autoplay></audio>
+    </section>
+    <section>
+      <h2>Audio autoplay by play() method</h2>
+      <audio src="../media/tetris.mp3" id="audio2" controls></audio>
+      <script>
+        document.getElementById("audio2").play();
+      </script>
+    </section>
+    <section>
+      <h2>Video autoplay by attribute</h2>
+    </section>
+    <section>
+      <h2>Video (muted) autoplay by attribute</h2>
+    </section>
+    <section>
+      <h2>Video autoplay by play() method</h2>
+    </section>
+    <section>
+      <h2>Video (muted) autoplay by play() method</h2>
     </section>
     <script>
       if ('serviceWorker' in navigator) {
