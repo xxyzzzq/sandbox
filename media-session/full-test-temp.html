@@ -134,8 +134,9 @@ seekForwardCheckbox.onchange = function() {
     window.navigator.mediaSession.onseekforward = seekForwardCheckbox.checked ? seekForward : null;
 }
 
-// window.navigator.mediaSession.setActionHandler("play", playAudio);
-// window.navigator.mediaSession.setActionHandler("pause", pauseAudio);
+// Commenting out play/pause action handlers will make background playback work.
+window.navigator.mediaSession.setActionHandler("play", playAudio);
+window.navigator.mediaSession.setActionHandler("pause", pauseAudio);
 window.navigator.mediaSession.setActionHandler("previoustrack", selectPreviousTrack);
 window.navigator.mediaSession.setActionHandler("nexttrack", selectNextTrack);
 window.navigator.mediaSession.setActionHandler("seekbackward", seekBackward);
