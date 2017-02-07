@@ -3,6 +3,7 @@
 <head>
     <title>Media Session Test page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="../favicon.png" />
 </head>
 <body>
     <audio id="audio" controls></audio>
@@ -22,7 +23,7 @@
 
 var tracks = [
   {
-    src: "media/acousticbreeze.mp3",
+    src: "../media/BigBuck.webm",
     metadata: new MediaMetadata({title:"Acoustic Breeze", artist: "Bensound", artwork: [{ src: "images/icon_1.png" }]})
   },
   {
@@ -108,13 +109,9 @@ function playAudio() {
         updateTrack();
     }
 }
-var counter = 0;
-    
+
 function pauseAudio() {
-    if (audio.paused)
-        audio.play();
-    else
-        audio.pause();
+    audio.pause();
 }
 
 playPauseButton.onclick = togglePlayPause;
