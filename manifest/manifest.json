@@ -8,6 +8,5 @@
     }
   ],
   "start_url": "/sandbox/manifest/simple-app.html",
-  "display": "standalone",
-  "scope": "/sandbox/manifest/"
+  "display": "standalone"
 }
