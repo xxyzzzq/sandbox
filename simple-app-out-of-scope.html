@@ -1,9 +1,57 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>A page that is out of scope</title>
-</head>
-<body>
-  <a href="manifest/simple-app.html">Back to the scope</a>
-</body>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <title>Web Manifest Test page (out of scope)</title>
+  </head>
+  <body>
+    <header>
+      <h1>Web Manifest Test Page</h1>
+    </header>
+    <section>
+      <p><a href="manifest/simple-app.html">Back to scope</a></p>
+    </section>
+    <section>
+      <h2>Audio autoplay by attribute</h2>
+      <audio src="media/tetris.mp3" id="audio1" controls autoplay></audio>
+    </section>
+    <section>
+      <h2>Audio autoplay by play() method</h2>
+      <audio src="media/tetris.mp3" id="audio2" controls></audio>
+      <script>
+        document.getElementById("audio2").play()
+          .then(_ => console.log("audio2 autoplay success"))
+          .catch(_ => console.log("audio2 autoplay failure"));
+      </script>
+    </section>
+    <section>
+      <h2>Video autoplay by attribute</h2>
+      <video src='https://storage.googleapis.com/dalecurtis-shared/buck2.mp4' width='565' height='320' autoplay controls></video>
+    </section>
+    <section>
+      <h2>Video (muted) autoplay by attribute</h2>
+      <video src='https://storage.googleapis.com/dalecurtis-shared/buck2.mp4' width='565' height='320' autoplay controls muted></video>
+    </section>
+    <section>
+      <h2>X-origin video autoplay by attribute</h2>
+      <iframe src='autoplay/iframe-test.html' width='600' height='380'></iframe>
+    </section>
+    <section>
+      <h2>X-origin video (muted) autoplay by attribute</h2>
+      <iframe src='autoplay/iframe-test-muted.html' width='600' height='380' muted></iframe>
+    </section>
+    <script>
+      if ((!location.port || location.port == "80") && location.protocol != 'https:') {
+        location.protocol = 'https:';
+      }
+    
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js', {scope: './'}).then(function(registration) {
+          console.log("registered service worker");
+        }).catch(function(error) {
+          console.log("failed to register service worker");
+        });
+      }
+    </script>
+  </body>
 </html>
