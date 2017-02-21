@@ -13,7 +13,7 @@
 <script>
   var video = document.querySelector("video");
   var ta = document.querySelector("textarea");
-  video.addEventListener("play", _ => { ta.value += "video playing&#13;&#10;" });
-  video.addEventListener("pause", _ => { ta.value += "video paused&#13;&#10;" });
+  video.addEventListener("play", _ => { ta.value += "video playing\\\n" });
+  video.addEventListener("pause", _ => { ta.value += "video paused\\\n" });
 </script>
 </html>
