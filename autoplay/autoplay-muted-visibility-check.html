@@ -4,7 +4,7 @@
   <title>Autoplay muted videos test page</title>
 </head>
 <body>
-  <textarea rows=100>I am spacing<br/></textarea>
+  <textarea rows=100>I am spacing</textarea>
   <section>
     <div>autoplay muted</div>
     <video src='https://storage.googleapis.com/dalecurtis-shared/buck2.mp4' controls autoplay muted></video>
@@ -13,6 +13,7 @@
 <script>
   var video = document.querySelector("video");
   var ta = document.querySelector("textarea");
+  ta.value += "\r\n";
   video.addEventListener("play", _ => { ta.value += "video playing\r\n" });
   video.addEventListener("pause", _ => { ta.value += "video paused\r\n" });
 </script>
