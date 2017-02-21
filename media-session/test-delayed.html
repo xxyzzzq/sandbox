@@ -70,7 +70,7 @@ var audio = document.getElementById("audio");
 function updateTrack() {
   audio.src = tracks[trackId].src;
   window.navigator.mediaSession.metadata = tracks[trackId].metadata;
-  audio.play();
+  setTimeout(_ => { audio.play() }, 5000 );
 }
 
 function selectPreviousTrack() {
@@ -94,7 +94,7 @@ function seekForward() {
 function togglePlayPause() {
   if (audio.src) {
     if (audio.paused)
-      audio.play();
+        setTimeout(_ => { audio.play() }, 5000 );
     else
       audio.pause();
   } else {
