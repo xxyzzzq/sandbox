@@ -70,7 +70,7 @@ var audio = document.getElementById("audio");
 function updateTrack() {
   audio.src = tracks[trackId].src;
   window.navigator.mediaSession.metadata = tracks[trackId].metadata;
-  setTimeout(_ => { audio.play() }, 5000 );
+  setTimeout(_ => { audio.play() }, 10000 );
 }
 
 function selectPreviousTrack() {
@@ -94,7 +94,7 @@ function seekForward() {
 function togglePlayPause() {
   if (audio.src) {
     if (audio.paused)
-        setTimeout(_ => { audio.play() }, 5000 );
+        setTimeout(_ => { audio.play() }, 10000 );
     else
       audio.pause();
   } else {
@@ -104,7 +104,7 @@ function togglePlayPause() {
 
 function playAudio() {
     if (audio.src) {
-        setTimeout(_ => { audio.play() }, 5000 );
+        setTimeout(_ => { audio.play() }, 10000 );
     } else {
         updateTrack();
     }
