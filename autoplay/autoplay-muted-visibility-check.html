@@ -11,6 +11,8 @@
   </section>
 </body>
 <script>
-
+  var video = document.querySelector("video");
+  video.addEventListener("play", _ => console.log("video playing"));
+  video.addEventListener("pause", _ => console.log("video paused"));
 </script>
 </html>
