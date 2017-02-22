@@ -68,13 +68,9 @@ var seekForwardCheckbox = document.getElementById("seek-forward-checkbox");
 var audio = document.getElementById("audio");
 
 function updateTrack() {
-  shouldLoad = !!!audio.src;
   audio.src = tracks[trackId].src;
-  if (shouldLoad) {
-    audio.load();
-  }
   window.navigator.mediaSession.metadata = tracks[trackId].metadata;
-  setTimeout(_ => { audio.play() }, 10000 );
+  audio.play();
 }
 
 function selectPreviousTrack() {
@@ -98,7 +94,7 @@ function seekForward() {
 function togglePlayPause() {
   if (audio.src) {
     if (audio.paused)
-        setTimeout(_ => { audio.play() }, 10000 );
+      audio.play();
     else
       audio.pause();
   } else {
@@ -108,7 +104,7 @@ function togglePlayPause() {
 
 function playAudio() {
     if (audio.src) {
-        setTimeout(_ => { audio.play() }, 10000 );
+        audio.play();
     } else {
         updateTrack();
     }
@@ -144,6 +140,8 @@ window.navigator.mediaSession.setActionHandler("previoustrack", selectPreviousTr
 window.navigator.mediaSession.setActionHandler("nexttrack", selectNextTrack);
 window.navigator.mediaSession.setActionHandler("seekbackward", seekBackward);
 window.navigator.mediaSession.setActionHandler("seekforward", seekForward);
+
+audio.src = tracks[trackId].src;
 
 </script>
 </html>
