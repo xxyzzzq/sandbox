@@ -68,7 +68,11 @@ var seekForwardCheckbox = document.getElementById("seek-forward-checkbox");
 var audio = document.getElementById("audio");
 
 function updateTrack() {
+  shouldLoad = !!!audio.src;
   audio.src = tracks[trackId].src;
+  if (shouldLoad) {
+    audio.load();
+  }
   window.navigator.mediaSession.metadata = tracks[trackId].metadata;
   setTimeout(_ => { audio.play() }, 10000 );
 }
