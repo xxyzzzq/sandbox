@@ -76,7 +76,7 @@ function updateTrack() {
   window.navigator.mediaSession.metadata = tracks[trackId].metadata;
   setTimeout(_ => { audio.play() }, 10000 );
 }
- 
+
 function selectPreviousTrack() {
   trackId = (trackId + tracks.length - 1) % tracks.length;
   updateTrack();
