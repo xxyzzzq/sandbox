@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flickering state test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="../favicon.png" />
+</head>
+<body>
+    <audio id="audio" controls src="media/buddy.mp3"></audio>
+    <button type="button" id="flicker-button">Flicker</button>
+    * Music obtained from www.bensound.com under Creative Commons License.
+</body>
+<script>
+
+var trackId = 0;
+
+var flickerButton = document.getElementById("flicker-button");
+
+var audio = document.getElementById("audio");
+
+function flicker() {
+  audio.play();
+  audio.pause();
+  audio.play();
+  audio.pause();
+}
+
+flickerButton.onclick = flicker;
+</script>
+</html>
