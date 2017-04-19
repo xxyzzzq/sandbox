@@ -144,7 +144,7 @@ window.navigator.mediaSession.setActionHandler("seekforward", seekForward);
 var count = 0;
 function updateTitle() {
   if (!window.navigator.mediaSession.metadata) {
-    window.navigator.mediaSession.metadata = {};
+    window.navigator.mediaSession.metadata = new MediaMetadata({});
   }
   window.navigator.mediaSession.metadata.title = "" + (count++);
   setTimeout(updateTitle, 0);
