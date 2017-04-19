@@ -122,16 +122,16 @@ seekForwardButton.onclick = seekForward;
 audio.onended = selectNextTrack;
 
 previousTrackCheckbox.onchange = function() {
-    window.navigator.mediaSession.onprevioustrack = previousTrackCheckbox.checked ? selectPreviousTrack : null;
+    window.navigator.mediaSession.setActionHandler("previoustrack", previousTrackCheckbox.checked ? selectPreviousTrack : null);
 }
 nextTrackCheckbox.onchange = function() {
-    window.navigator.mediaSession.onnexttrack = nextTrackCheckbox.checked ? selectNextTrack : null;
+    window.navigator.mediaSession.setActionHandler("nexttrack", nextTrackCheckbox.checked ? selectNextTrack : null);
 }
 seekBackwardCheckbox.onchange = function() {
-    window.navigator.mediaSession.onseekbackward = seekBackwardCheckbox.checked ? seekBackward : null;
+    window.navigator.mediaSession.setActionHandler("seekbackward", seekBackwardCheckbox.checked ? seekBackward : null);
 }
 seekForwardCheckbox.onchange = function() {
-    window.navigator.mediaSession.onseekforward = seekForwardCheckbox.checked ? seekForward : null;
+    window.navigator.mediaSession.setActionHandler("seekforward", seekForwardCheckbox.checked ? seekForward : null);
 }
 
 window.navigator.mediaSession.setActionHandler("play", playAudio);
