@@ -141,7 +141,7 @@ window.navigator.mediaSession.setActionHandler("nexttrack", selectNextTrack);
 window.navigator.mediaSession.setActionHandler("seekbackward", seekBackward);
 window.navigator.mediaSession.setActionHandler("seekforward", seekForward);
 
-int count = 0;
+var count = 0;
 function updateTitle() {
   window.navigator.mediaSession.metadata.title = "" + (count++);
   setTimeout(updateTitle, 0);
